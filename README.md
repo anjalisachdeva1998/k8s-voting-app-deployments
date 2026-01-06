@@ -90,23 +90,23 @@ Apply all Kubernetes manifests from the repository root:
 
 ```bash
 kubectl apply -f deployments/
-kubectl apply -f services/
-```
-
-### Verification
-
-```
-k8s-voting-app-deployments% kubectl apply -f ./deployments/
 deployment.apps/db created
 deployment.apps/redis created
 deployment.apps/result created
 deployment.apps/vote created
 deployment.apps/worker created
-k8s-voting-app-deployments% kubectl apply -f ./services/   
+
+kubectl apply -f services/
 service/db created
 service/redis created
 service/result created
 service/vote created
+
+```
+
+### Verification
+
+```
 k8s-voting-app-deployments% kubectl get deployment
 NAME     READY   UP-TO-DATE   AVAILABLE   AGE
 db       1/1     1            1           17s
@@ -114,6 +114,7 @@ redis    1/1     1            1           17s
 result   1/1     1            1           17s
 vote     1/1     1            1           17s
 worker   1/1     1            1           17s
+
 k8s-voting-app-deployments% kubectl get svc
 NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
 db           ClusterIP   10.x.x.x    <none>        5432/TCP         9s
@@ -121,6 +122,7 @@ kubernetes   ClusterIP   10.x.x.x        <none>        443/TCP          16h
 redis        ClusterIP   10.x.x.x     <none>        6379/TCP         9s
 result       NodePort    10.x.x.x   <none>        8080:31001/TCP   9s
 vote         NodePort    10.x.x.x    <none>        8080:31000/TCP   9s
+
 k8s-voting-app-deployments% kubectl get all
 NAME                          READY   STATUS    RESTARTS   AGE
 pod/db-6d4d465497-98jv9       1/1     Running   0          27s
@@ -149,5 +151,13 @@ replicaset.apps/redis-664fbf775b    1         1         1       27s
 replicaset.apps/result-7b7f69957f   1         1         1       27s
 replicaset.apps/vote-6d8f9ddcdd     1         1         1       27s
 replicaset.apps/worker-89f44c667    1         1         1       27s
-k8s-voting-app-deployments% 
+k8s-voting-app-deployments%
+
+k8s-voting-app-deployments% kubectl get node -o wide
+NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE            KERNEL-VERSION   CONTAINER-RUNTIME
+minikube   Ready    control-plane   16h   v1.34.0   10.x.x.x    <none>        Buildroot 2025.02   6.6.95           docker://28.4.0
+
+Go to above IP with respective NodePort to view apps in browser:
+10.x.x.x:31000 for vote app
+10.x.x.x:31001 for result app
 ```
