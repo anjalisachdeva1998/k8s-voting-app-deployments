@@ -157,7 +157,7 @@ k8s-voting-app-deployments% kubectl get node -o wide
 NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE            KERNEL-VERSION   CONTAINER-RUNTIME
 minikube   Ready    control-plane   16h   v1.34.0   10.x.x.x    <none>        Buildroot 2025.02   6.6.95           docker://28.4.0
 
-Go to above IP with respective NodePort to view apps in browser:
+Go to above Node IP with respective NodePort to view apps in browser:
 10.x.x.x:31000 for vote app
 10.x.x.x:31001 for result app
 ```
