@@ -102,6 +102,7 @@ service/redis created
 service/result created
 service/vote created
 
+kubectl apply -f configs/
 ```
 
 ### Verification
